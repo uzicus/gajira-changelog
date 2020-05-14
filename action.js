@@ -25,7 +25,11 @@ module.exports = class {
 
     var issueIds = gitCommits.split("\n")
       .map(line => {
-        return line.match('[A-Z]+-[0-9]+')?.[0]
+        var result = line.match('[A-Z]+-[0-9]+')
+
+        if (result) {
+          return result[0]
+        }
       })
       .filter(issueOrNull => {
         return issueOrNull != null
