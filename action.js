@@ -21,7 +21,7 @@ module.exports = class {
     
     console.log(`GITHUB_WORKSPACE = ${process.env.GITHUB_WORKSPACE}`)
     console.log(`get log git by range origin/${argv.fromBranch}..origin/${argv.toBranch}`)
-    const gitCommits = execSync(`git --git-dir ${this.githubWorkspace}/.git log origin/${argv.fromBranch}..origin/${argv.toBranch} --oneline --no-merges`).toString()
+    const gitCommits = execSync(`git --git-dir ${process.env.GITHUB_WORKSPACE}/.git log origin/${argv.fromBranch}..origin/${argv.toBranch} --oneline --no-merges`).toString()
 
     var issueIds = gitCommits.split("\n")
       .map(line => {
