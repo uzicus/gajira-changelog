@@ -45,7 +45,7 @@ module.exports = class {
 
     var formattedIssues = issues.map(issue => {
       return eval('`'+argv.issueFormatter+'`')
-    }).join('\n')
+    }).join("\n").toString()
 
     return { formattedIssues }
   }
