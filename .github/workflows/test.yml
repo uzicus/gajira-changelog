@@ -11,16 +11,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-
-    - name: Transition issue
-      id: transition
-      uses: atlassian/gajira-transition@master
-      with:
-        issue: GA-181
-        transition: "In progress"
+    - name: Login
+      uses: atlassian/gajira-login@master
+      env:
+        JIRA_BASE_URL: 'https://igooods.atlassian.net'
+        JIRA_USER_EMAIL: 'd.tkachenko@dev.igooods.ru'
+        JIRA_API_TOKEN: 'jr0GTmwljrHE1U47Far1A515'
 
     - name: Jira changelog
-      uses: ./
+      id: changelog
+      uses: uzicus/gajira-changelog@master
       with:
-        from_branch: ''
-        to_branch: ''
+        from_branch: 'master'
+        to_branch: 'develop'
+        issue_format: '- <${issue.self}|${issue.key}> ${issue.fields["summary"]}'
+
+    - run: echo ${{ steps.changelog.outputs.changelog }}
