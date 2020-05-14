@@ -2,11 +2,9 @@ const fs = require('fs')
 const YAML = require('yaml')
 const core = require('@actions/core')
 
-const cliConfigPath = `${process.env.HOME}/.jira.d/config.yml`
 const configPath = `${process.env.HOME}/jira/config.yml`
 const Action = require('./action')
 
-// eslint-disable-next-line import/no-dynamic-require
 const config = YAML.parse(fs.readFileSync(configPath, 'utf8'))
 
 async function exec () {
