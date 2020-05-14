@@ -17,7 +17,8 @@ async function exec () {
 
     console.log(result.formattedIssues)
     //core.setOutput('changelog', result.formattedIssues)
-    execSync(`::set-output name=changelog::${result.formattedIssues}`)
+    
+    execSync(`::set-output name=changelog::'${result.formattedIssues}'`)
   } catch (error) {
     console.error(error)
     process.exit(1)
