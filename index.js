@@ -14,6 +14,7 @@ async function exec () {
       config,
     }).execute()
 
+    console.log(result.formattedIssues)
     core.setOutput('changelog', result.formattedIssues)
   } catch (error) {
     console.error(error)
@@ -22,19 +23,6 @@ async function exec () {
 }
 
 function parseArgs () {
-  /*
-  const transition = core.getInput('transition')
-  const transitionId = core.getInput('transitionId')
-  if (!transition && !transitionId) {
-    // Either transition _or_ transitionId _must_ be provided
-    throw new Exception("Error: please specify either a transition or transitionId")
-  }
-  return {
-    issue: core.getInput('issue'),
-    transition,
-    transitionId
-  }
-  */
   return {
     fromBranch: core.getInput('from_branch'),
     toBranch: core.getInput('to_branch'),
