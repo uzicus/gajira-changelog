@@ -1,0 +1,26 @@
+on:
+  push
+
+name: Test Jira Changelog
+
+jobs:
+  test-transition-issue:
+    name: Jira Changelog
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+
+    - name: Transition issue
+      id: transition
+      uses: atlassian/gajira-transition@master
+      with:
+        issue: GA-181
+        transition: "In progress"
+
+    - name: Jira changelog
+      uses: ./
+      with:
+        from_branch: ''
+        to_branch: ''

@@ -1,0 +1,16 @@
+name: 'Jira Changelog'
+
+inputs:
+  from_branch:
+    required: true
+  to_branch:
+    required: true
+  issue_format:
+    required: true
+
+outputs:
+  changelog:
+
+runs:
+  using: 'node12'
+  main: './dist/index.js'
