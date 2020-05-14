@@ -1,6 +1,7 @@
 const fs = require('fs')
 const YAML = require('yaml')
 const core = require('@actions/core')
+const { execSync } = require('child_process');
 
 const configPath = `${process.env.HOME}/jira/config.yml`
 const Action = require('./action')
@@ -15,7 +16,8 @@ async function exec () {
     }).execute()
 
     console.log(result.formattedIssues)
-    core.setOutput('changelog', result.formattedIssues)
+    //core.setOutput('changelog', result.formattedIssues)
+    execSync(`::set-output name=changelog::${result.formattedIssues}`)
   } catch (error) {
     console.error(error)
     process.exit(1)
