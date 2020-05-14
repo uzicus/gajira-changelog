@@ -5,7 +5,7 @@ const { execSync } = require('child_process');
 //const issueFormatter = '- <${issue.self}|${issue.key}> ${issue.fields["summary"]}'
 
 module.exports = class {
-  constructor({ githubWorkspace, argv, config }) {
+  constructor({ argv, config }) {
     this.Jira = new Jira({
       baseUrl: config.baseUrl,
       token: config.token,
@@ -14,14 +14,14 @@ module.exports = class {
 
     this.config = config
     this.argv = argv
-    this.githubWorkspace = githubWorkspace
   }
 
   async execute() {
     const { argv } = this
 
+    console.log(`GITHUB_WORKSPACE = ${process.env.GITHUB_WORKSPACE}`)
     console.log(`get log git by range origin/${argv.fromBranch}..origin/${argv.toBranch}`)
-    const gitCommits = execSync(`git --git-dir ${this.githubWorkspace}/.git log origin/${argv.fromBranch}..origin/${argv.toBranch} --oneline --no-merges`).toString()
+    const gitCommits = execSync(`git --git-dir ${process.env.GITHUB_WORKSPACE}/.git log origin/${argv.fromBranch}..origin/${argv.toBranch} --oneline --no-merges`).toString()
 
     var issueIds = gitCommits.split("\n")
       .map(line => {

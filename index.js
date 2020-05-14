@@ -11,9 +11,7 @@ const config = YAML.parse(fs.readFileSync(configPath, 'utf8'))
 
 async function exec () {
   try {
-    console.log(`GITHUB_WORKSPACE = ${process.env.GITHUB_WORKSPACE}`)
     const result = await new Action({
-      githubWorkspace: process.env.GITHUB_WORKSPACE,
       argv: parseArgs(),
       config,
     }).execute()
